@@ -16,8 +16,8 @@ COPY . .
 # Build the Go app with static linking to avoid glibc issues
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o myapp main.go
 
-# Start a new stage from scratch
-FROM debian:alpine
+# Start a new stage from scratch with Alpine Linux
+FROM alpine:latest
 
 # Set the Current Working Directory inside the container
 WORKDIR /root/
