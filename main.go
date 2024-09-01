@@ -14,7 +14,7 @@ var ctx = context.Background()
 func main() {
     // Create a new Redis client
     rdb := redis.NewClient(&redis.Options{
-        Addr: "redis:6380", // Address of the Redis server
+        Addr: "localhost:6380", // Address of the Redis server
     })
 
     // Ping the Redis server to check the connection
