@@ -65,7 +65,7 @@ pipeline {
                 sh '''
                 docker stop todo-app || true
                 docker rm todo-app || true
-                docker run -d --name todo-app -p 9001:80 ${DOCKER_IMAGE}:${DOCKER_TAG}
+                docker run -d --name todo-app -p 9042:80 ${DOCKER_IMAGE}:${DOCKER_TAG}
                 '''
             }
         }
