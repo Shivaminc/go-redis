@@ -22,6 +22,22 @@ pipeline {
             }
         }
 
+        stage('Run Tests') {
+            steps {
+                echo 'Running tests...'
+                sh '''
+                docker run --rm --name go-app ${DOCKER_IMAGE}:${DOCKER_TAG} go test -v -coverprofile=coverage.out -json | tee test_output.json | gotestsum --format=short-verbose --junitfile=report.xml
+                '''
+            }
+        }
+
+        stage('Publish Test Reports') {
+            steps {
+                echo 'Publishing test reports...'
+                junit '**/report.xml'
+            }
+        }
+
         stage('Push Docker Image') {
             steps {
                 script {
