@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'shivaminc/goredis-app'  // Update with your Docker Hub username and image name
+        DOCKER_IMAGE = 'shivaminc/goredis-app'
         DOCKER_TAG = "${env.BUILD_NUMBER}"
-        REPO_URL = 'https://github.com/Shivaminc/go-redis'  // Update with your Git repository URL
+        REPO_URL = 'https://github.com/Shivaminc/go-redis'
     }
 
     stages {
@@ -12,6 +12,13 @@ pipeline {
             steps {
                 echo 'Cloning repository...'
                 git url: "${REPO_URL}", branch: 'main'
+            }
+        }
+
+        stage('Check Go Installation') {
+            steps {
+                echo 'Checking Go installation...'
+                sh 'go version'
             }
         }
 
@@ -65,4 +72,3 @@ pipeline {
         }
     }
 }
-
